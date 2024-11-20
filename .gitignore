@@ -1,2 +1,5 @@
 /target/
 .vscode/
+microservice1/target/
+microservice2/target/
+microservice3/target/

@@ -6,7 +6,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>microservice3</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>3.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <!-- Parent POM from Spring Boot -->
@@ -14,7 +14,6 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.1.1</version>  <!-- Use the correct Spring Boot version -->
-        <relativePath/> <!-- Lookup parent from repository -->
     </parent>
 
     <properties>
@@ -67,12 +66,17 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <snapshotRepository>
-            <id>snapshots</id>
-            <name>a0xoo5xoov10c-artifactory-primary-0-snapshots</name>
-            <url>https://testcicdvineet.jfrog.io/artifactory/mvn-project-libs-snapshot</url>
-        </snapshotRepository>
-    </distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>a0q0ayyzix1tu-artifactory-primary-0-releases</name>
+            <url>https://testcicdvs.jfrog.io/artifactory/vsrepo-libs-snapshot</url>
+        </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <name>a0q0ayyzix1tu-artifactory-primary-0-snapshots</name>
+        <url>https://testcicdvs.jfrog.io/artifactory/vsrepo-libs-snapshot</url>
+    </snapshotRepository>
+</distributionManagement>
     <build>
         <plugins>
             <!-- Add Spring Boot Maven Plugin -->

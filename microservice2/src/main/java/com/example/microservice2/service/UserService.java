@@ -11,4 +11,8 @@ public class UserService {
         user.setId(1L);
         return user;
     }
+
+    public String getUser() {
+        return "Hello from Microservice 2!!!! \nUser Name is Vineet Sharma";
+    }
 }

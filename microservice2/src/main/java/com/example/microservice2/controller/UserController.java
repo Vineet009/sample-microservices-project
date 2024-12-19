@@ -20,4 +20,9 @@ public class UserController {
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
+
+    @GetMapping("/users1")
+    public String getUser() {
+        return userService.getUser();
+    }
 }

@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: microservice3
-        image: testcicdvs.jfrog.io/vs-docker-repo/microservice1:3.0.0
+        image: testcicdvs.jfrog.io/vs-docker-repo/microservice3:3.0.0
         ports:
         - containerPort: 8083

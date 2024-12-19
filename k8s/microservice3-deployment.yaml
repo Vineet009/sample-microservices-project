@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice3
+  labels:
+    app: microservice3
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: microservice3
+  template:
+    metadata:
+      labels:
+        app: microservice3
+    spec:
+      containers:
+      - name: microservice3
+        image: testcicdvs.jfrog.io/vs-docker-repo/microservice1:3.0.0
+        ports:
+        - containerPort: 8083

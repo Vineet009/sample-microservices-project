@@ -1,0 +1,72 @@
+name: Build, Push, and Deploy to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      ARTIFACTORY_URL: https://testcicdvs.jfrog.io
+      ARTIFACTORY_REPO: vs-docker-repo
+      GKE_PROJECT: your-gcp-project-id
+      GKE_CLUSTER: your-gke-cluster-name
+      GKE_ZONE: your-gke-cluster-zone
+      DOCKER_REGISTRY: ${{ secrets.ARTIFACTORY_DOCKER_REGISTRY }}
+      DOCKER_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      GCP_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+    steps:
+    # Checkout the repository
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    # Set up Java for Maven builds
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Build the microservices using Maven
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+
+    # Log in to Artifactory Docker registry
+    - name: Docker Login to Artifactory
+      run: echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+
+    # Build Docker images for each microservice
+    - name: Build Docker Images
+      run: |
+        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice1:3.0.0 ./microservice1
+        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice2:3.0.0 ./microservice2
+        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice3:3.0.0 ./microservice3
+
+    # Push Docker images to Artifactory
+    - name: Push Docker Images to Artifactory
+      run: |
+        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice1:latest
+        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice2:latest
+        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice3:latest
+
+    # Set up Google Cloud SDK
+    - name: Set up GCP
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        credentials_json: $GCP_CREDENTIALS
+
+    # Authenticate with GKE
+    - name: Authenticate with GKE
+      run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+
+    # Deploy microservices to GKE
+    - name: Deploy to GKE
+      run: |
+        kubectl apply -f ./k8s/microservice1-deployment.yaml
+        kubectl apply -f ./k8s/microservice2-deployment.yaml
+        kubectl apply -f ./k8s/microservice3-deployment.yaml

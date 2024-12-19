@@ -45,13 +45,11 @@ docker ps
 Test => curl http://localhost:8081/greet
 
 
-docker login https://testcicdvs.jfrog.io/artifactory/api/docker/vs-docker-repo -u sweetpsharma86@gmail.com -p cmVmdGtuOjAxOjE3NjYxNDIwNzg6RUo2SU9ZUHJCZFVOaTV2SzVISUZMbURsdms3
+docker login https://testcicdvs.jfrog.io/artifactory/api/docker/vs-docker-repo -u sweetpsharma86@gmail.com -p <<Password>>
 
 https://testcicdvs.jfrog.io/artifactory/api/docker/vs-docker-repo
 
 docker login -usweetpsharma86@gmail.com testcicdvs.jfrog.io
-
-Token - cmVmdGtuOjAxOjE3NjYxNDIwNzg6RUo2SU9ZUHJCZFVOaTV2SzVISUZMbURsdms3
 
 Tag the images with the repository name
 

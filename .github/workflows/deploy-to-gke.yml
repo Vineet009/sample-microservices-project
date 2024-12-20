@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ARTIFACTORY_URL: https://testcicdvs.jfrog.io
+      ARTIFACTORY_URL: testcicdvs.jfrog.io
+      RELEASE_VERSION: 3.1.0
       ARTIFACTORY_REPO: vs-docker-repo
       GKE_PROJECT: your-gcp-project-id
       GKE_CLUSTER: your-gke-cluster-name
@@ -46,16 +47,16 @@ jobs:
     # Build Docker images for each microservice
     - name: Build Docker Images
       run: |
-        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice1:3.0.0 ./microservice1
-        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice2:3.0.0 ./microservice2
-        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice3:3.0.0 ./microservice3
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice1:$RELEASE_VERSION ./microservice1
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice2:$RELEASE_VERSION ./microservice2
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice3:$RELEASE_VERSION ./microservice3
 
     # Push Docker images to Artifactory
     - name: Push Docker Images to Artifactory
       run: |
-        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice1:latest
-        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice2:latest
-        docker push $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice3:latest
+        docker push $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice1:$RELEASE_VERSION
+        docker push $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice2:$RELEASE_VERSION
+        docker push $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice3:$RELEASE_VERSION
 
     # Set up Google Cloud SDK
     - name: Set up GCP

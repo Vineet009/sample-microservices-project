@@ -32,9 +32,12 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    # Build the microservices using Maven
-    - name: Build with Maven
-      run: mvn clean package -DskipTests
+    # Build and Deploay the microservices using Maven
+    - name: Build and Deploy with Maven
+      env:
+        ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
+        ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+      run: mvn clean deploy -DskipTests -s ./settings.xml
 
     # Log in to Artifactory Docker registry
     - name: Docker Login to Artifactory
@@ -43,9 +46,9 @@ jobs:
     # Build Docker images for each microservice
     - name: Build Docker Images
       run: |
-        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice1:3.0.0 ./microservice1
-        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice2:3.0.0 ./microservice2
-        docker build -t $DOCKER_REGISTRY/$ARTIFACTORY_REPO/microservice3:3.0.0 ./microservice3
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice1:3.0.0 ./microservice1
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice2:3.0.0 ./microservice2
+        docker build -t $ARTIFACTORY_URL/$ARTIFACTORY_REPO/microservice3:3.0.0 ./microservice3
 
     # Push Docker images to Artifactory
     - name: Push Docker Images to Artifactory

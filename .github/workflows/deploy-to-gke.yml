@@ -38,7 +38,7 @@ jobs:
 
     # Log in to Artifactory Docker registry
     - name: Docker Login to Artifactory
-      run: echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME --password-stdin
+      run: echo $DOCKER_PASSWORD | docker login $DOCKER_REGISTRY -u $DOCKER_USERNAME -p $ARTIFACTORY_PASSWORD
 
     # Build Docker images for each microservice
     - name: Build Docker Images

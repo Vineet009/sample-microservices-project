@@ -76,3 +76,10 @@ docker run -d --name microservice1-container --network microservices-network -p 
 docker run -d --name microservice2-container --network microservices-network -p 8082:8082 testcicdvs.jfrog.io/vs-docker-repo/microservice2:3.0.0
 
 docker run -d --name microservice3-container --network microservices-network -p 8083:8083 testcicdvs.jfrog.io/vs-docker-repo/microservice3:3.0.0
+
+
+Deploy locally all the micoroservices using docker-compose.yml file
+
+docker-compose up -d
+
+docker-compose down 

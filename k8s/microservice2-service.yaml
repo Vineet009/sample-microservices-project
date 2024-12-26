@@ -8,6 +8,6 @@ spec:
   selector:
     app: microservice2
   ports:
-  - protocol: TCP
+  - protocol: http
     port: 80
     targetPort: 8082

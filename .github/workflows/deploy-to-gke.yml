@@ -46,10 +46,10 @@ jobs:
       #   run: |
       #     kubectl delete secret regcred
 
-    - name: Create name space if doesn't exists
+      - name: Create name space if doesn't exists
         run: |
           if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
-              kubectl create namespace ns-vs-demo
+          kubectl create namespace ns-vs-demo
           fi
 
 

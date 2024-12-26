@@ -3,7 +3,7 @@ name: Deploy to GKE
 on:
   push:
     branches:
-      - main1
+      - main
 
 jobs:
   deploy:
@@ -29,7 +29,7 @@ jobs:
 
       - name: Configure gke-gcloud-auth-plugin
         run: echo "export USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> $GITHUB_ENV
-        
+
       - name: Authenticate with GKE
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \

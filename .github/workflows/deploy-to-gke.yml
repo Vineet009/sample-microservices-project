@@ -42,16 +42,15 @@ jobs:
             --zone ${{ secrets.GCP_REGION }} \
             --project ${{ secrets.GCP_PROJECT }}
 
-      # - name: Delete docker secret  for docker registry
-      #   run: |
-      #     kubectl delete secret regcred
+      - name: Delete docker secret  for docker registry
+        run: |
+          kubectl delete secret regcred
 
       - name: Create name space if doesn't exists
         run: |
           if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
           kubectl create namespace ns-vs-demo
           fi
-
 
       - name: Create secret for docker registry
         run: |

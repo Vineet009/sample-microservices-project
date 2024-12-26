@@ -41,11 +41,14 @@ jobs:
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \
             --zone ${{ secrets.GCP_REGION }} \
             --project ${{ secrets.GCP_PROJECT }}
-
+      - name: Delete docker secret  for docker registry
+        run: |
+          kubectl delete secret regcred
+          
       - name: Create secret for docker registry
         run: |
           kubectl get secret regcred || kubectl create secret docker-registry regcred \
-            --docker-server=${{ secrets.ARTIFACTORY_DOCKER_REGISTRY }} \
+            --docker-server=${{ secrets.ARTIFACTORY_URL }} \
             --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
             --docker-email=sweetpsharma86@gmail.com

@@ -42,6 +42,14 @@ jobs:
             --zone ${{ secrets.GCP_REGION }} \
             --project ${{ secrets.GCP_PROJECT }}
 
+      - name: Create secret for docker registry
+        run: |
+          kubectl create secret docker-registry regcred \
+            --docker-server=${{ secrets.ARTIFACTORY_DOCKER_REGISTRY }} \
+            --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
+            --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
+            --docker-email=sweetpsharma86@gmail.com
+
       - name: Deploy microservices
         run: |
           kubectl apply -f ./k8s/microservice1-deployment.yaml

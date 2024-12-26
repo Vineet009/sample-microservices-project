@@ -19,3 +19,5 @@ spec:
         image: testcicdvs.jfrog.io/vs-docker-repo/microservice1:3.0.0
         ports:
         - containerPort: 8081
+      imagePullSecrets:
+      - name: regcred

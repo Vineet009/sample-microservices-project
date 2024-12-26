@@ -42,9 +42,9 @@ jobs:
             --zone ${{ secrets.GCP_REGION }} \
             --project ${{ secrets.GCP_PROJECT }}
 
-      # - name: Delete docker secret  for docker registry
-      #   run: |
-      #     kubectl delete secret regcred -n ns-vs-demo
+      - name: Delete docker secret  for docker registry
+        run: |
+          kubectl delete secret regcred
 
       - name: Create name space if doesn't exists
         run: |
@@ -58,7 +58,8 @@ jobs:
             --docker-server=${{ secrets.ARTIFACTORY_URL }} \
             --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
-            --docker-email=sweetpsharma86@gmail.com
+            --docker-email=sweetpsharma86@gmail.com \
+            -n ns-vs-demo
 
       # - name: Delete all microservices
       #   run: |

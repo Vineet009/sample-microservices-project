@@ -6,7 +6,7 @@ metadata:
   labels:
     app: microservice2
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: microservice2
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: microservice2
-        image: testcicdvs.jfrog.io/vs-docker-repo/microservice2:3.0.0
+        image: testcicdvs.jfrog.io/vs-docker-repo/microservice2:3.1.0
         ports:
         - containerPort: 8082
       imagePullSecrets:

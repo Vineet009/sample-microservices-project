@@ -65,9 +65,9 @@ docker push testcicdvs.jfrog.io/vs-docker-repo/microservice3:3.0.0
 
 Pull the images
 
-docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice1:3.0.0
-docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice2:3.0.0
-docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice3:3.0.0
+docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice1:3.1.0
+docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice2:3.1.0
+docker pull testcicdvs.jfrog.io/vs-docker-repo/microservice3:3.1.0
 
 run the image in container directly from artifactory 
 

@@ -82,7 +82,7 @@ jobs:
 
     # Authenticate with GKE
     - name: Authenticate with GKE
-      run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT
+      run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GCP_REGION --project $GKE_PROJECT
 
     # Deploy microservices to GKE
     - name: Deploy to GKE

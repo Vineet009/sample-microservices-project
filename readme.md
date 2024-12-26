@@ -83,3 +83,34 @@ Deploy locally all the micoroservices using docker-compose.yml file
 docker-compose up -d
 
 docker-compose down 
+
+
+Manual Steps before create GKE cluster
+
+Step 1 - Create an account on GCP and create a Project ID
+
+Step 2 - Enable API
+
+  1. Compute Engine API
+  2. Kubernetes Engine API
+
+Step 3 - Create a Service account and assign 3 roles
+
+  1. Compute Admim
+  2. Kubernetes Engnie Admin / Container Admin
+  3. Service Account User
+
+Step 4 - Update below github secrets
+
+  1. ARTIFACTORY_DOCKER_REGISTRY
+  2. ARTIFACTORY_DOCKER_REPO
+  3. ARTIFACTORY_PASSWORD
+  4. ARTIFACTORY_URL
+  5. ARTIFACTORY_USERNAME
+  6. GCP_PROJECT
+  7. GCP_REGION
+  8. GCP_SA_KEY
+  9. GKE_CLUSTER
+
+
+![alt text](image-1.png)

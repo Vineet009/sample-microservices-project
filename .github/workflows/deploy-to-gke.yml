@@ -46,6 +46,13 @@ jobs:
       #   run: |
       #     kubectl delete secret regcred
 
+    - name: Create name space if doesn't exists
+        run: |
+          if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
+              kubectl create namespace ns-vs-demo
+          fi
+
+
       - name: Create secret for docker registry
         run: |
           kubectl get secret regcred || kubectl create secret docker-registry regcred \
@@ -54,11 +61,11 @@ jobs:
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
             --docker-email=sweetpsharma86@gmail.com
 
-      - name: Delete all microservices
-        run: |
-          kubectl delete all -l app=microservice1
-          kubectl delete all -l app=microservice2
-          kubectl delete all -l app=microservice3
+      # - name: Delete all microservices
+      #   run: |
+      #     kubectl delete all -l app=microservice1
+      #     kubectl delete all -l app=microservice2
+      #     kubectl delete all -l app=microservice3
       
       - name: Deploy microservices
         run: |

@@ -44,7 +44,7 @@ jobs:
 
       - name: Create secret for docker registry
         run: |
-          kubectl create secret docker-registry regcred \
+          kubectl get secret regcred || kubectl create secret docker-registry regcred \
             --docker-server=${{ secrets.ARTIFACTORY_DOCKER_REGISTRY }} \
             --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \

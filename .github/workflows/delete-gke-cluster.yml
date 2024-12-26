@@ -8,7 +8,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # Step 1: Set up Google Cloud SDK
+    # Step 1: Checkout Code
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    # Step 2: Authenticate with GCP
+    - name: Authenticate with GCP
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: '${{ secrets.GCP_SA_KEY }}'
+
+    # Step 3: Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
@@ -16,7 +26,11 @@ jobs:
         service_account_key: ${{ secrets.GCP_SA_KEY }}
         project_id: ${{ secrets.GCP_PROJECT }}
 
-    # Step 2: Delete GKE Cluster
+    # Step 4: Set GCP Project
+    - name: Set GCP Project
+        run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+        
+    # Step 5: Delete GKE Cluster
     - name: Delete GKE Cluster
       run: |
         set -e

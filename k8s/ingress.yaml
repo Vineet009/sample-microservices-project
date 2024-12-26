@@ -17,18 +17,18 @@ spec:
           service:
             name: microservice1
             port:
-              number: 8081
+              number: 80
       - path: /microservice2
         pathType: Prefix
         backend:
           service:
             name: microservice2
             port:
-              number: 8082
+              number: 80
       - path: /microservice3
         pathType: Prefix
         backend:
           service:
             name: microservice3
             port:
-              number: 8083
+              number: 80

@@ -9,5 +9,5 @@ spec:
     app: microservice2
   ports:
   - protocol: TCP
-    port: 8082
+    port: 80
     targetPort: 8082

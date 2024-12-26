@@ -28,7 +28,6 @@ jobs:
             --num-nodes 3 \
             --machine-type e2-medium \
             --enable-ip-alias \
-            --enable-autoscaling --min-nodes=1 --max-nodes=5 \
             --release-channel regular
         else
           echo "Cluster already exists. Skipping creation."

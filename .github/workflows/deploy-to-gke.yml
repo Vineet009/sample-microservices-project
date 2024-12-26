@@ -78,3 +78,12 @@ jobs:
           kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
           kubectl apply -f ./k8s/microservice2-service.yaml -n ns-vs-demo
           kubectl apply -f ./k8s/microservice3-service.yaml -n ns-vs-demo
+      
+      - name: Deploy the GCP Ingress controller
+        run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-gce/master/deploy/static/ingress-gce.yaml
+          kubectl apply -f ingress.yaml
+
+      - name: Verify Load Balancer
+        run: |
+          kubectl get ingress -n ns-vs-demo

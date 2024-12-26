@@ -77,6 +77,9 @@ jobs:
       run: |
         gcloud components install gke-gcloud-auth-plugin --quiet
 
+    - name: Configure gke-gcloud-auth-plugin
+      run: echo "export USE_GKE_GCLOUD_AUTH_PLUGIN=True" >> $GITHUB_ENV
+
     # Authenticate with GKE
     - name: Authenticate with GKE
       run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GKE_PROJECT

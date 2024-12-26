@@ -28,7 +28,7 @@ jobs:
 
     # Step 4: Set GCP Project
     - name: Set GCP Project
-      run: gcloud config set project ${{ secrets.GCP_PROJECT_ID }}
+      run: gcloud config set project ${{ secrets.GCP_PROJECT }}
 
     # Step 5: Create or update the GKE Cluster
     - name: Create or Update GKE Cluster

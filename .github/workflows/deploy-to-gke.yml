@@ -34,13 +34,13 @@ jobs:
         run: |
           echo "Cluster: ${{ secrets.GKE_CLUSTER }}"
           echo "Zone: ${{ secrets.GCP_REGION }}"
-          echo "Project: ${{ secrets.GKE_PROJECT }}"
+          echo "Project: ${{ secrets.GCP_PROJECT }}"
 
       - name: Authenticate with GKE
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \
             --zone ${{ secrets.GCP_REGION }} \
-            --project ${{ secrets.GKE_PROJECT }}
+            --project ${{ secrets.GCP_PROJECT }}
 
       - name: Deploy microservices
         run: |

@@ -8,6 +8,6 @@ spec:
   selector:
     app: microservice3
   ports:
-  - protocol: http
-    port: 80
+  - protocol: TCP
+    port: 8083
     targetPort: 8083

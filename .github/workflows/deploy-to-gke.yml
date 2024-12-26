@@ -81,7 +81,6 @@ jobs:
       
       - name: Deploy the GCP Ingress controller
         run: |
-          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-gce/master/deploy/static/ingress-gce.yaml
           kubectl apply -f ingress.yaml
 
       - name: Verify Load Balancer

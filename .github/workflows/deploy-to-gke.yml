@@ -61,14 +61,20 @@ jobs:
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
             --docker-email=sweetpsharma86@gmail.com
 
-      # - name: Delete all microservices
-      #   run: |
-      #     kubectl delete all -l app=microservice1
-      #     kubectl delete all -l app=microservice2
-      #     kubectl delete all -l app=microservice3
+      - name: Delete all microservices
+        run: |
+          kubectl delete all -l app=microservice1
+          kubectl delete all -l app=microservice2
+          kubectl delete all -l app=microservice3
       
       - name: Deploy microservices
         run: |
           kubectl apply -f ./k8s/microservice1-deployment.yaml -n ns-vs-demo
           kubectl apply -f ./k8s/microservice2-deployment.yaml -n ns-vs-demo
           kubectl apply -f ./k8s/microservice3-deployment.yaml -n ns-vs-demo
+      
+      - name: Expose services
+        run: |
+          kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice2-service.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice3-service.yaml -n ns-vs-demo

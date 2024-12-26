@@ -22,17 +22,3 @@ spec:
         - containerPort: 8081
       imagePullSecrets:
       - name: regcred
-
-# microservice1-service.yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: microservice1
-  namespace: ns-vs-demo
-spec:
-  selector:
-    app: microservice1
-  ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8081

@@ -2,17 +2,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: microservices-ingress
-  namespace: ns-vs-demo
+  name: ms-ingress-1
 spec:
-  ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-      - path: /microservice1
-        pathType: Prefix
-        backend:
-          service:
-            name: microservice1-svc
-            port:
-              number: 80
+  defaultBackend:
+    service:
+      name: microservice1
+      port:
+        number: 80

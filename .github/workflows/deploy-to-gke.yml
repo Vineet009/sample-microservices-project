@@ -85,6 +85,6 @@ jobs:
       #   run: |
       #     kubectl apply -f ./k8s/ingress.yaml
 
-      # - name: Verify Load Balancer
+      # - name: Verify Load Balancer code
       #   run: |
       #     kubectl get ingress -n ns-vs-demo

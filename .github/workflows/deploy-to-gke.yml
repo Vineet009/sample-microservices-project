@@ -72,15 +72,17 @@ jobs:
       - name: Deploy microservices
         run: |
           kubectl apply -f ./k8s/microservice1-deployment.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice2-deployment.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice3-deployment.yaml -n ns-vs-demo
       
-      - name: Expose services
-        run: |
-          kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
+      # - name: Expose services
+      #   run: |
+      #     kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
       
-      - name: Deploy the GCP Ingress controller
-        run: |
-          kubectl apply -f ./k8s/ingress.yaml
+      # - name: Deploy the GCP Ingress controller
+      #   run: |
+      #     kubectl apply -f ./k8s/ingress.yaml
 
-      - name: Verify Load Balancer code
-        run: |
-          kubectl get ingress -n ns-vs-demo
+      # - name: Verify Load Balancer code
+      #   run: |
+      #     kubectl get ingress -n ns-vs-demo

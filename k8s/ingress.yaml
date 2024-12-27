@@ -10,21 +10,21 @@ spec:
   rules:
   - http:
       paths:
-      - path: /microservice1
+      - path: /microservice1/greet
         pathType: Prefix
         backend:
           service:
             name: microservice1
             port:
               number: 80
-      - path: /microservice2
+      - path: /microservice2/users/users1
         pathType: Prefix
         backend:
           service:
             name: microservice2
             port:
               number: 80
-      - path: /microservice3
+      - path: /microservice3/products
         pathType: Prefix
         backend:
           service:

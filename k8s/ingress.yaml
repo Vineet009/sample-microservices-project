@@ -17,17 +17,3 @@ spec:
             name: microservice1
             port:
               number: 80
-      - path: /microservice2/users/users1
-        pathType: Prefix
-        backend:
-          service:
-            name: microservice2
-            port:
-              number: 80
-      - path: /microservice3/products
-        pathType: Prefix
-        backend:
-          service:
-            name: microservice3
-            port:
-              number: 80

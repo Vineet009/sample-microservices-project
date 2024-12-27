@@ -4,10 +4,10 @@ kind: Ingress
 metadata:
   name: microservices-ingress
   namespace: ns-vs-demo
-  # annotations:
-  #   nginx.ingress.kubernetes.io/rewrite-target: /
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: gce
+  ingressClassName: nginx
   rules:
   - http:
       paths:

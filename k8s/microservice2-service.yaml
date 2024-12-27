@@ -9,6 +9,6 @@ spec:
     app: microservice2
   ports:
   - protocol: TCP
-    port: 80
+    port: 8082
     targetPort: 8082
   type: ClusterIP

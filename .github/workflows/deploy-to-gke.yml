@@ -82,6 +82,7 @@ jobs:
       - name: Deploy the GCP Ingress controller
         run: |
           kubectl apply -f ./k8s/ingress.yaml
+          kubectl apply -f ./k8s/networkpolicy.yaml
 
       - name: Verify Load Balancer
         run: |

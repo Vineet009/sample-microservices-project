@@ -13,6 +13,6 @@ public class UserService {
     }
 
     public String getUser() {
-        return "Hello from Microservice 2!!!! \nUser Name is Vineet Sharma";
+        return "Hello from Microservice 2!!!! \nUser Name is Vineet Sharma\nVersion - 3.2.0";
     }
 }

@@ -9,7 +9,7 @@ jobs:
 
     env:
       ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-      RELEASE_VERSION: 3.1.0
+      RELEASE_VERSION: 3.2.0
       ARTIFACTORY_DOCKER_REPO: ${{ secrets.ARTIFACTORY_DOCKER_REPO }}
       GKE_PROJECT: ${{ secrets.GCP_PROJECT }}
       GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}

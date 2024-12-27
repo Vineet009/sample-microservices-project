@@ -6,6 +6,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: microservice1
+      name: microservice1-svc
       port:
         number: 80

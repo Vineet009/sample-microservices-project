@@ -4,9 +4,10 @@ kind: Ingress
 metadata:
   name: microservices-ingress
   namespace: ns-vs-demo
-  annotations:
-    kubernetes.io/ingress.class: "gce"  # For GCP Ingress
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: gce
   rules:
   - http:
       paths:
@@ -14,6 +15,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: microservice1
+            name: microservice1-svc
             port:
               number: 80

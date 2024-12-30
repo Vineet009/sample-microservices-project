@@ -83,7 +83,7 @@ jobs:
     # Authenticate with GKE
     - name: Authenticate with GKE
       run: |
-        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \ 
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \
           --zone ${{ secrets.GCP_REGION }} \
           --project ${{ secrets.GCP_PROJECT }}
 

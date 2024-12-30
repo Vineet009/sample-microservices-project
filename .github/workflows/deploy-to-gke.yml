@@ -39,6 +39,7 @@ jobs:
           echo "Zone: ${{ secrets.GCP_REGION }}"
           echo "Project: ${{ secrets.GCP_PROJECT }}"
 
+      # Authenticate with GKE
       - name: Authenticate with GKE
         run: |
           gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \
@@ -51,19 +52,19 @@ jobs:
 
       - name: Create name space if doesn't exists
         run: |
-          if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
-          kubectl create namespace ns-vs-demo
+          if ! kubectl get namespace ${{ secrets.GKE_NAMESPACE }} >/dev/null 2>&1; then
+          kubectl create namespace ${{ secrets.GKE_NAMESPACE }}
           fi
 
       - name: Create secret for docker registry
         run: |
-          if ! kubectl get secret regcred -n ns-vs-demo >/dev/null 2>&1; then
+          if ! kubectl get secret regcred -n ${{ secrets.GKE_NAMESPACE }} >/dev/null 2>&1; then
           kubectl create secret docker-registry regcred \
             --docker-server=${{ secrets.ARTIFACTORY_URL }} \
             --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
             --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
             --docker-email=sweetpsharma86@gmail.com \
-            -n ns-vs-demo
+            -n ${{ secrets.GKE_NAMESPACE }}
           fi
 
       # - name: Delete all microservices
@@ -74,15 +75,15 @@ jobs:
       
       - name: Deploy microservices
         run: |
-          kubectl apply -f ./k8s/microservice1-deployment.yaml -n ns-vs-demo
-          kubectl apply -f ./k8s/microservice2-deployment.yaml -n ns-vs-demo
-          kubectl apply -f ./k8s/microservice3-deployment.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice1-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
+          kubectl apply -f ./k8s/microservice2-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
+          kubectl apply -f ./k8s/microservice3-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
       
       - name: Expose services
         run: |
-          kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
-          kubectl apply -f ./k8s/microservice2-service.yaml -n ns-vs-demo
-          kubectl apply -f ./k8s/microservice3-service.yaml -n ns-vs-demo
+          kubectl apply -f ./k8s/microservice1-service.yaml -n ${{ secrets.GKE_NAMESPACE }}
+          kubectl apply -f ./k8s/microservice2-service.yaml -n ${{ secrets.GKE_NAMESPACE }}
+          kubectl apply -f ./k8s/microservice3-service.yaml -n ${{ secrets.GKE_NAMESPACE }}
       
       # - name: Deploy the GCP Ingress controller
       #   run: |
@@ -90,4 +91,4 @@ jobs:
 
       # - name: Verify Load Balancer code
       #   run: |
-      #     kubectl get ingress -n ns-vs-demo
+      #     kubectl get ingress -n ${{ secrets.GKE_NAMESPACE }}

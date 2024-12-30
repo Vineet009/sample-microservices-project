@@ -82,33 +82,34 @@ jobs:
 
     # Authenticate with GKE
     - name: Authenticate with GKE
-      run: gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \ 
-             --zone ${{ secrets.GCP_REGION }} \
-             --project ${{ secrets.GCP_PROJECT }}
+      run: |
+        gcloud container clusters get-credentials ${{ secrets.GKE_CLUSTER }} \ 
+          --zone ${{ secrets.GCP_REGION }} \
+          --project ${{ secrets.GCP_PROJECT }}
 
     - name: Create name space if doesn't exists
       run: |
-        if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
-        kubectl create namespace ns-vs-demo
+        if ! kubectl get namespace ${{ secrets.GKE_NAMESPACE }} >/dev/null 2>&1; then
+        kubectl create namespace ${{ secrets.GKE_NAMESPACE }}
         fi
 
     - name: Create secret for docker registry
       run: |
-        if ! kubectl get secret regcred -n ns-vs-demo >/dev/null 2>&1; then
+        if ! kubectl get secret regcred -n ${{ secrets.GKE_NAMESPACE }} >/dev/null 2>&1; then
         kubectl create secret docker-registry regcred \
           --docker-server=${{ secrets.ARTIFACTORY_URL }} \
           --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
           --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
           --docker-email=sweetpsharma86@gmail.com \
-          -n ns-vs-demo
+          -n ${{ secrets.GKE_NAMESPACE }}
         fi
 
     # Deploy microservices to GKE
     - name: Deploy to GKE
       run: |
-        kubectl apply -f ./k8s/microservice1-deployment.yaml
-        kubectl apply -f ./k8s/microservice2-deployment.yaml
-        kubectl apply -f ./k8s/microservice3-deployment.yaml
-        kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
-        kubectl apply -f ./k8s/microservice2-service.yaml -n ns-vs-demo
-        kubectl apply -f ./k8s/microservice3-service.yaml -n ns-vs-demo
+        kubectl apply -f ./k8s/microservice1-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
+        kubectl apply -f ./k8s/microservice2-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
+        kubectl apply -f ./k8s/microservice3-deployment.yaml -n ${{ secrets.GKE_NAMESPACE }}
+        kubectl apply -f ./k8s/microservice1-service.yaml -n ${{ secrets.GKE_NAMESPACE }}
+        kubectl apply -f ./k8s/microservice2-service.yaml -n ${{ secrets.GKE_NAMESPACE }}
+        kubectl apply -f ./k8s/microservice3-service.yaml -n ${{ secrets.GKE_NAMESPACE }}

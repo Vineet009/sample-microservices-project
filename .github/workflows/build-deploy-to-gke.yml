@@ -9,7 +9,7 @@ jobs:
 
     env:
       ARTIFACTORY_URL: ${{ secrets.ARTIFACTORY_URL }}
-      RELEASE_VERSION: 3.2.0
+      RELEASE_VERSION: 4.0.0
       ARTIFACTORY_DOCKER_REPO: ${{ secrets.ARTIFACTORY_DOCKER_REPO }}
       GKE_PROJECT: ${{ secrets.GCP_PROJECT }}
       GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}
@@ -84,9 +84,29 @@ jobs:
     - name: Authenticate with GKE
       run: gcloud container clusters get-credentials $GKE_CLUSTER --zone $GCP_REGION --project $GKE_PROJECT
 
+    - name: Create name space if doesn't exists
+      run: |
+        if ! kubectl get namespace ns-vs-demo >/dev/null 2>&1; then
+        kubectl create namespace ns-vs-demo
+        fi
+
+      - name: Create secret for docker registry
+        run: |
+        if ! kubectl get secret regcred -n ns-vs-demo >/dev/null 2>&1; then
+        kubectl create secret docker-registry regcred \
+          --docker-server=${{ secrets.ARTIFACTORY_URL }} \
+          --docker-username=${{ secrets.ARTIFACTORY_USERNAME }} \
+          --docker-password=${{ secrets.ARTIFACTORY_PASSWORD }} \
+          --docker-email=sweetpsharma86@gmail.com \
+          -n ns-vs-demo
+        fi
+
     # Deploy microservices to GKE
     - name: Deploy to GKE
       run: |
         kubectl apply -f ./k8s/microservice1-deployment.yaml
         kubectl apply -f ./k8s/microservice2-deployment.yaml
         kubectl apply -f ./k8s/microservice3-deployment.yaml
+        kubectl apply -f ./k8s/microservice1-service.yaml -n ns-vs-demo
+        kubectl apply -f ./k8s/microservice2-service.yaml -n ns-vs-demo
+        kubectl apply -f ./k8s/microservice3-service.yaml -n ns-vs-demo

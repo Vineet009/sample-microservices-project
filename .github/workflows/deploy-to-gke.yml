@@ -1,9 +1,12 @@
 name: Deploy to GKE
 
+# on:
+#   push:
+#     branches:
+#       - master
+
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch: # Manual trigger for this workflow
 
 jobs:
   deploy:

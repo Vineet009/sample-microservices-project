@@ -6,14 +6,14 @@
 
     <groupId>com.example</groupId>
     <artifactId>microservice3</artifactId>
-    <version>3.1.0</version>
+    <version>4.0.0</version>
     <packaging>jar</packaging>
 
     <!-- Parent POM from Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.0</version>  <!-- Use the correct Spring Boot version -->
+        <version>3.1.0</version>  <!-- Use the correct Spring Boot version -->
     </parent>
 
     <properties>

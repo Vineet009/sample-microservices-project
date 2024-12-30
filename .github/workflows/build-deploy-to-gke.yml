@@ -90,8 +90,8 @@ jobs:
         kubectl create namespace ns-vs-demo
         fi
 
-      - name: Create secret for docker registry
-        run: |
+    - name: Create secret for docker registry
+      run: |
         if ! kubectl get secret regcred -n ns-vs-demo >/dev/null 2>&1; then
         kubectl create secret docker-registry regcred \
           --docker-server=${{ secrets.ARTIFACTORY_URL }} \

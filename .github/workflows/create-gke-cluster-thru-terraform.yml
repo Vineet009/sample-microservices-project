@@ -35,12 +35,13 @@ jobs:
         run: |
           echo "Listing files in the Terraform directory:"
           ls -lrt ./sample-microservices-project/terraform/
-        # Debug: Check if the credentials file exists
+
           echo "Listing files in the Terraform directory:"
-          ls -lrt ./sample-microservices-project/terraform/gcp-key.json
+          ls -l ./sample-microservices-project/terraform/gcp-key.json
+
           echo "change directory to terraform folder"
           cd terraform
-          
+
       # Step 4: Initialize Terraform
       - name: Terraform Init
         run: terraform init

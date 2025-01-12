@@ -50,10 +50,11 @@ jobs:
         run: terraform init
 
       # Step 5: Terraform Plan
-      - name: Terraform Plan
-        run: terraform plan \
-             -var "project_id=${{ secrets.GCP_PROJECT }}" \
-             -var "credentials_file=gcp-key.json"
+      - name: Run Terraform Plan
+        run: |
+          terraform -chdir=./terraform plan \
+          -var "project_id=${{ secrets.GCP_PROJECT }}" \
+          -var "credentials_file=${{ github.workspace }}/terraform/gcp-key.json"
 
 
       # Step 6: Terraform Apply

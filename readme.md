@@ -114,3 +114,20 @@ Step 4 - Update below github secrets
 
 
 ![alt text](image-1.png)
+
+
+Terraform
+
+run locally 
+
+terraform init
+
+terraform validate
+
+terraform plan -var-file="local.tfvars"
+
+Manual approval before apply
+terrafrom apply -var-file="local.tfvars"
+
+Autumate the approval
+terrafrom apply -auto-approve -var-file="local.tfvars"

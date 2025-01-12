@@ -41,7 +41,7 @@ jobs:
 
           echo "Listing files in the Terraform directory"
           ls -lrt
-          
+
           echo "Listing files in the Terraform directory"
 
       # Step 4: Initialize Terraform
@@ -50,8 +50,8 @@ jobs:
 
       # Step 5: Terraform Plan
       - name: Terraform Plan
-        run: terraform plan -var="credentials_file=${{ github.workspace }}/terraform/gcp-key.json"
+        run: terraform plan -var-file="terraform.tfvars"
 
       # Step 6: Terraform Apply
       - name: Terraform Apply
-        run: terraform apply -auto-approve -var="credentials_file=${{ github.workspace }}/gcp-key.json"
+        run: terraform apply -auto-approve -var-file="terraform.tfvars"

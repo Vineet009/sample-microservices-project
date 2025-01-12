@@ -32,7 +32,14 @@ jobs:
 
       # Step 4: Change the directory to terraform
       - name: Change Directory to terraform
-        run: cd ./sample-microservices-project/sample-microservices-project/terraform
+        run: |
+         
+          ls -lrt ./sample-microservices-project/terraform/
+        # Debug: Check if the credentials file exists
+          ls -lrt ./sample-microservices-project/terraform/gcp-key.json
+          echo "change directory to terraform folder"
+          cd terraform
+
 
       # Step 4: Initialize Terraform
       - name: Terraform Init

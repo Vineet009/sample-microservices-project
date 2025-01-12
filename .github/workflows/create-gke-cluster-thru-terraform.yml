@@ -36,13 +36,13 @@ jobs:
           echo "Current working directory"
           pwd
 
-          echo "Listing files in the Terraform directory"
-          ls -lrt ./sample-microservices-project/terraform/
-
-          echo "Listing files in the Terraform directory"
-
           echo "change directory to terraform folder"
           cd terraform
+
+          echo "Listing files in the Terraform directory"
+          ls -lrt
+          
+          echo "Listing files in the Terraform directory"
 
       # Step 4: Initialize Terraform
       - name: Terraform Init

@@ -31,6 +31,9 @@ jobs:
           echo "${{ secrets.GCP_SA_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
           cat $GOOGLE_APPLICATION_CREDENTIALS
 
+      - name: Validate Credentials File
+        run: jq . ${{ github.workspace }}/terraform/gcp-key.json
+
 
       # Step 4: Change the directory to terraform
       - name: Change Directory to terraform

@@ -30,6 +30,10 @@ jobs:
         run: |
           echo "${{ secrets.GCP_SA_KEY }}" > $GOOGLE_APPLICATION_CREDENTIALS
 
+      # Step 4: Change the directory to terraform
+      - name: Change Directory to terraform
+        run: cd terraform
+
       # Step 4: Initialize Terraform
       - name: Terraform Init
         run: terraform init

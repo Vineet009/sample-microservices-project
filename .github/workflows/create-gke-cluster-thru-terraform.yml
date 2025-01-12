@@ -32,7 +32,7 @@ jobs:
 
       # Step 4: Change the directory to terraform
       - name: Change Directory to terraform
-        run: cd terraform
+        run: cd sample-microservices-project/sample-microservices-project/terraform
 
       # Step 4: Initialize Terraform
       - name: Terraform Init

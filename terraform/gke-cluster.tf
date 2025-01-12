@@ -21,6 +21,7 @@ variable "machine_type" {
 variable "project_id" {
   description = "The GCP project ID"
   type        = string
+  default     = "defaultproject-gcp"
 }
 
 variable "region" {
@@ -32,6 +33,7 @@ variable "region" {
 variable "credentials_file" {
   description = "Path to the service account key file"
   type        = string
+  default     = "us-central1"
 }
 
 # Create GKE cluster without default node pool

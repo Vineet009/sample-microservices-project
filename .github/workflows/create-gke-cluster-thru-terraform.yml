@@ -41,6 +41,10 @@ jobs:
 
           echo "change directory to terraform folder"
           cd terraform
+          sed -i "s|\${GCP_PROJECT}|${{ secrets.GCP_PROJECT }}|g" ./terraform/terraform.tfvars
+          sed -i "s|\${GCP_REGION}|${{ secrets.GCP_REGION }}|g" ./terraform/terraform.tfvars
+          sed -i "s|\${GKE_CLUSTER}|${{ secrets.GKE_CLUSTER }}|g" ./terraform/terraform.tfvars
+          sed -i "s|\${GCP_SA_KEY}|${{ secrets.GCP_SA_KEY }}|g" ./terraform/terraform.tfvars
 
           echo "Listing files in the Terraform directory"
           ls -lrt

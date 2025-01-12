@@ -33,6 +33,14 @@ jobs:
       # Step 4: Change the directory to terraform
       - name: Change Directory to terraform
         run: |
+          echo "Current working directory"
+          pwd
+
+          echo "Listing files in the Terraform directory"
+          ls -lrt ./sample-microservices-project/terraform/
+
+          echo "Listing files in the Terraform directory"
+
           echo "change directory to terraform folder"
           cd terraform
 

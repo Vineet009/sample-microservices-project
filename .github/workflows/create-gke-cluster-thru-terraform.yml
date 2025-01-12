@@ -57,7 +57,7 @@ jobs:
           -var "project_id=${{ secrets.GCP_PROJECT }}" \
           -var "region=${{ secrets.GCP_REGION }}" \
           -var "cluster_name=${{ secrets.GKE_CLUSTER }}" \
-          -var "credentials_file=${{ github.workspace }}/terraform/gcp-key.json"
+          -var "credentials_file=$GOOGLE_APPLICATION_CREDENTIALS"
 
 
       # Step 6: Terraform Apply
@@ -65,7 +65,7 @@ jobs:
         run: |
           terraform -chdir=./terraform apply \
              -auto-approve \
-             -var "credentials_file=${{ github.workspace }}/terraform/gcp-key.json" \
+             -var "credentials_file=$GOOGLE_APPLICATION_CREDENTIALS \
              -var "project_id=${{ secrets.GCP_PROJECT }}" \
              -var "region=${{ secrets.GCP_REGION }}" \
              -var "cluster_name=${{ secrets.GKE_CLUSTER }}"
